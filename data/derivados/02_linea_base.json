@@ -218,26 +218,38 @@
     "vista_hermosa": 206,
     "reforma": 84
   },
-  "servidor_usado": "https://router.project-osrm.org",
+  "segmentos_cerrados": {
+    "vista_hermosa": 408,
+    "reforma": 162
+  },
+  "servidor_usado": "http://127.0.0.1:5001",
   "linea_base": {
-    "mediana_s": 443.0,
-    "p95_s": 836.98,
+    "mediana_s": 460.45,
+    "p95_s": 853.0,
     "por_zonas_min": {
       "z10": {
-        "z10": 3.611,
-        "z15": 11.826,
-        "z16": 12.483
+        "z10": 3.649,
+        "z15": 11.884,
+        "z16": 13.098
       },
       "z15": {
-        "z10": 10.321,
-        "z15": 4.292,
-        "z16": 4.57
+        "z10": 10.338,
+        "z15": 4.309,
+        "z16": 4.921
       },
       "z16": {
-        "z10": 10.897,
-        "z15": 3.632,
-        "z16": 4.382
+        "z10": 11.197,
+        "z15": 3.956,
+        "z16": 4.972
       }
+    }
+  },
+  "delta_preliminar": {
+    "vista_hermosa": {
+      "mediana_%": 16.9725268758823
+    },
+    "reforma": {
+      "mediana_%": 0.0
     }
   }
 }
