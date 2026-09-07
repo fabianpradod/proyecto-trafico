@@ -33,6 +33,17 @@ El razonamiento completo está en
 El contraste entre los dos es el hallazgo central: la misma metodología
 distingue un eslabón crítico de uno redundante.
 
+### Resultado preliminar (flujo libre, 552 pares O-D, ya validado)
+
+| Escenario | Δ% mediana | Δ% p95 | Δ% red total |
+|---|---|---|---|
+| Boulevard Vista Hermosa | **+16.97 %** | **+36.31 %** | **+31.61 %** |
+| Avenida Reforma | **0.00 %** | +0.71 % | +0.74 % |
+
+Sin tráfico todavía: es el desvío geométrico puro, o sea el piso del efecto. El
+peor par es z10 → z15 con **+69.8 %**. Detalle en
+[estructura-proyecto.md §9.0](estructura-proyecto.md).
+
 ## Cómo correrlo
 
 ### 1. Entorno
@@ -57,9 +68,9 @@ O directo desde la terminal, una vez descargado el `.pbf`:
 docker compose -f osrm/docker-compose.yml up -d
 ```
 
-`construir.sh` se corre **una sola vez** (24 s en Apple Silicon, ~1 GB de grafo).
+`construir.sh` se corre **una sola vez** (24 s en Apple Silicon, 519 MB de grafo).
 El servidor queda en **`localhost:5001`** — el 5000 lo ocupa el receptor de
-AirPlay en macOS. Después, cada cambio de escenario cuesta segundos:
+AirPlay en macOS. Después, cada cambio de escenario cuesta 5.7 s:
 
 ```bash
 ./osrm/cerrar.sh data/derivados/cierre_vista_hermosa.csv

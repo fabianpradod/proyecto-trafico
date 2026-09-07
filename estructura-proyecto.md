@@ -269,7 +269,7 @@ toman sus nodos consecutivos y se escriben los pares en ambos sentidos.
 | Recurso | Tamaño | Origen |
 |---|---|---|
 | `guatemala-latest.osm.pbf` | 131 MB | Geofabrik (verificado) |
-| Grafo OSRM compilado | ~1.5 GB | generado localmente |
+| Grafo OSRM compilado | 519 MB | generado localmente (medido) |
 | CSV de cierre | pocos KB | Overpass |
 
 Los dos primeros están en `.gitignore` y se regeneran con el notebook 01. Al
@@ -357,6 +357,48 @@ que no hay evidencia para rechazarlo al nivel elegido.
 ---
 
 ## 9. Experimentos
+
+### 9.0 Resultado preliminar ya validado
+
+El notebook 02 corrió los tres escenarios contra el OSRM local y las tres
+verificaciones de §12 pasaron. Estos son tiempos de **flujo libre sobre 552
+pares origen-destino**, sin tráfico todavía: es el desvío puramente geométrico
+que impone la red, y por lo tanto el **piso** del efecto.
+
+| Escenario | Δ% mediana | Δ% p95 | Δ% red total | Pares sin ruta |
+|---|---|---|---|---|
+| Boulevard Vista Hermosa | **+16.97 %** | **+36.31 %** | **+31.61 %** | 0 % |
+| Avenida Reforma | **0.00 %** | +0.71 % | +0.74 % | 0 % |
+
+**La hipótesis del §3.3 se confirma con un margen enorme: 17 % contra 0 %.** La
+misma metodología, aplicada a dos vías `primary` de porte parecido, distingue
+un eslabón crítico de uno redundante. La Reforma no mueve la mediana ni un
+punto porque sus carriles auxiliares —4.2 km que el escenario deja abiertos a
+propósito— absorben el tráfico a media cuadra de distancia.
+
+Δ% de la mediana por par de zonas, cierre de Vista Hermosa:
+
+| origen \ destino | z10 | z15 | z16 |
+|---|---|---|---|
+| **z10** | 0.0 | **+69.8** | **+43.2** |
+| **z15** | +36.2 | 0.0 | 0.0 |
+| **z16** | +22.8 | 0.0 | 0.0 |
+
+Dos cosas que hay que explotar en el análisis:
+
+1. **El daño es direccional.** z10 → z15 sufre +69.8 % y el sentido contrario
+   solo +36.2 %. Las calzadas están mapeadas por separado y las alternativas no
+   son simétricas. Un promedio sobre toda la red escondería esto por completo.
+2. **Los viajes intrazonales no se enteran.** Todos los pares dentro de una
+   misma zona quedan en 0.0 %. El cierre no degrada la movilidad local: rompe
+   la conexión *entre* zonas, que es una conclusión mucho más específica que
+   "aumenta el tráfico".
+
+Con congestión el efecto debe crecer, y no en proporción: la BPR tiene
+exponente 4, así que un desvío que además satura la ruta alterna se paga mucho
+más caro que en flujo libre. **Contrastar el Δ% final del notebook 04 contra
+este piso es uno de los resultados del proyecto**, porque separa cuánto del daño
+es geometría y cuánto es congestión.
 
 ### 9.1 Corridas principales
 
@@ -494,15 +536,22 @@ Es el punto donde un proyecto así falla en silencio: el CSV se escribe, OSRM lo
 acepta, y las rutas no cambian porque los IDs de nodo no correspondían. Tres
 verificaciones obligatorias antes de creerle a cualquier Δ%:
 
-1. **Nodos ausentes.** Toda ruta que en el escenario base pasaba por la calle
-   cerrada debe, tras el cierre, devolver una lista `nodos` con intersección
-   vacía contra el conjunto de nodos cerrados. Se comprueba con una aserción,
-   no a ojo.
+1. **Segmentos ausentes.** Ninguna ruta del escenario cerrado debe **recorrer**
+   un segmento de la calle cerrada, donde "segmento" es un par de nodos
+   consecutivos.
+
+   > **Por nodo NO sirve, y este es el error fácil de cometer.** Una ruta puede
+   > compartir un nodo con la calle cerrada sin circular por ella: ese nodo es
+   > una intersección, y el tráfico transversal la cruza con todo derecho.
+   > Medido en la Avenida Reforma: **7 de 60 rutas comparten nodos** con la
+   > avenida cerrada y **ninguna recorre un segmento suyo**. Verificar por nodo
+   > daría siete falsos positivos y mandaría al grupo a buscar un error que no
+   > existe. La comprobación vive en `red.recorre_cerrados`.
 2. **El tiempo sube o no hay ruta.** Para todo par O-D,
    $T_{\text{cerrado}} \ge T_{\text{abierto}}$. Cerrar calles nunca acelera un
    viaje. Un solo par que baje significa que algo está mal.
-3. **Cambia lo que tiene que cambiar.** Los pares O-D cuya ruta base no tocaba
-   la calle cerrada deben conservar exactamente el mismo tiempo. Si cambian,
+3. **Cambia lo que tiene que cambiar.** Los pares O-D cuya ruta base no
+   circulaba por la calle cerrada deben conservar exactamente el mismo tiempo. Si cambian,
    el CSV está cerrando de más.
 
 Estas tres van como aserciones en el notebook 02 y se vuelven a correr cada vez
