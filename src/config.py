@@ -120,6 +120,79 @@ ESCENARIOS = {
 # escenario quiere medir.
 
 # --------------------------------------------------------------------------
+# Horizonte y llegadas — fuente A
+# --------------------------------------------------------------------------
+# Hora pico de la tarde. `t` va siempre en HORAS desde el inicio del horizonte.
+HORA_INICIO = 16
+HORIZONTE_H = 3.0
+
+# λ(t) = λ_min + (λ_max − λ_min) · exp(−(t − t_pico)² / (2 τ²))   (§5.1)
+# Los valores dan ≈ 5 000 vehículos por réplica, el tamaño de §9.1.
+LAMBDA_MIN = 800.0    # veh/h, flujo de fondo fuera del pico
+LAMBDA_MAX = 2300.0   # veh/h, instantáneo en el máximo
+T_PICO_H = 1.5        # 17:30
+TAU_H = 0.75          # ancho del pico
+
+
+def lambda_llegadas(t):
+    """Intensidad en veh/h, con `t` en horas desde HORA_INICIO.
+
+    Acepta escalar o arreglo. Es la única definición del pico en el proyecto:
+    el adelgazamiento la recibe como argumento y no la reimplementa.
+    """
+    import numpy as _np
+
+    t = _np.asarray(t, dtype=float)
+    return LAMBDA_MIN + (LAMBDA_MAX - LAMBDA_MIN) * _np.exp(
+        -((t - T_PICO_H) ** 2) / (2.0 * TAU_H**2)
+    )
+
+
+# Cota para el adelgazamiento: λ(t) vale λ_max justo en t_pico, así que la
+# cota es ajustada y no hay que buscarla numéricamente.
+LAMBDA_COTA = LAMBDA_MAX
+
+# --------------------------------------------------------------------------
+# Velocidad del conductor — fuente D
+# --------------------------------------------------------------------------
+# Multiplicador s sobre la velocidad de flujo libre. Lognormal de mediana 1.0
+# (μ = 0); con σ = 0.20 el 90 % central de los conductores va entre 0.72× y
+# 1.39×, con la cola asimétrica a la derecha.
+LOGN_MU = 0.0
+LOGN_SIGMA = 0.20
+
+# --------------------------------------------------------------------------
+# Demora en intersección semaforizada — fuente E
+# --------------------------------------------------------------------------
+# Erlang(k=2): espera de semáforo más despeje de cola. Media k/λ = 30 s, la
+# demora típica de una intersección urbana en hora pico.
+ERLANG_K = 2
+ERLANG_MEDIA_S = 30.0
+ERLANG_LAMBDA = ERLANG_K / ERLANG_MEDIA_S  # 1/s
+
+# --------------------------------------------------------------------------
+# Generadores de números pseudoaleatorios — §7 par 3
+# --------------------------------------------------------------------------
+# LCG de Numerical Recipes: el generador propio del proyecto.
+LCG_A, LCG_C, LCG_M = 1664525, 1013904223, 2**32
+
+# RANDU: control negativo. Sus tripletas caen en 15 planos porque
+# x[n+2] = 6·x[n+1] − 9·x[n] (mod 2^31). No se usa para producir resultados.
+RANDU_A, RANDU_C, RANDU_M = 65539, 0, 2**31
+
+# --------------------------------------------------------------------------
+# Congestión — fuente F y §5.3  [pendiente: lo completa la pista C]
+# --------------------------------------------------------------------------
+# Valores clásicos del Bureau of Public Roads, ya fijados en §5.3.
+ALFA_BPR = 0.15
+BETA_BPR = 4.0
+# Faltan, y los decide la pista C antes de escribir simulacion.py:
+#   - capacidad nominal por carril y por clase de vía (fuente F)
+#   - σ y truncamiento de la normal de capacidad
+#   - ventana de tiempo sobre la que se cuenta el flujo v_a
+#   - fracción de viajes intrazonales y pesos de ORIGEN por zona (§5.2)
+
+# --------------------------------------------------------------------------
 # Presentación
 # --------------------------------------------------------------------------
 NAVY = "#003865"
