@@ -1,0 +1,12 @@
+# CC2017 Modelación y Simulación — Proyecto 1
+# python -m venv .venv && .venv/bin/pip install -r requirements.txt
+numpy
+scipy
+pandas
+matplotlib
+requests
+polyline
+folium
+jupyter
+ipykernel
+tqdm

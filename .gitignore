@@ -216,3 +216,33 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Asistentes de código
+.claude/
+.claude*
+CLAUDE.md
+.mcp.json
+.cursor/
+.cursorrules
+.aider*
+.github/copilot-instructions.md
+
+# Datos pesados del proyecto (se regeneran con los notebooks)
+data/osm/
+data/osrm/
+data/cache/
+*.osm.pbf
+*.osrm*
