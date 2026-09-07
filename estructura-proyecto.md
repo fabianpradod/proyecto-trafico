@@ -1,5 +1,12 @@
 # Estructura del proyecto
 
+> **Estado de entrega — pista C:** implementada y ejecutada. Las decisiones y
+> resultados vigentes están en [PISTA_C.md](PISTA_C.md). Se usa BPR de una pasada,
+> pool de 24 puntos y metadatos del PBF; la reasignación iterativa de §5.4 queda
+> como propuesta futura. El flujo libre histórico no es una cota inferior del
+> Δ% congestionado. Se corrigió además la restauración de escenarios OSRM.
+
+
 **CC2017 — Modelación y Simulación · Ciclo 2, 2026 · Universidad del Valle de Guatemala**
 
 Simulación del impacto del cierre de una vía principal sobre el tráfico de las
