@@ -31,10 +31,10 @@ def _coords(puntos: Iterable[Coord]) -> str:
 def _pedir(servicio: str, puntos: Sequence[Coord], servidor: str, **params) -> dict:
     url = f"{servidor}/{servicio}/v1/{PERFIL}/{_coords(puntos)}"
     r = requests.get(url, params=params, timeout=60)
-    r.raise_for_status()
     d = r.json()
     if d.get("code") != "Ok":
         raise ErrorOSRM(f"{d.get('code')}: {d.get('message', 'sin mensaje')}")
+    r.raise_for_status()
     return d
 
 
@@ -92,7 +92,14 @@ def ruta(origen: Coord, destino: Coord, servidor: str = OSRM_LOCAL,
     if geometria:
         salida["geometria"] = r["geometry"]
     if nodos:
-        salida["nodos"] = r["legs"][0]["annotation"]["nodes"]
+        ann = r["legs"][0]["annotation"]
+        salida["nodos"] = ann["nodes"]
+        salida["duraciones_s"] = ann["duration"]
+        salida["distancias_m"] = ann["distance"]
+        if len(ann["nodes"]) != len(ann["duration"]) + 1:
+            raise ErrorOSRM("Anotaciones de nodos y segmentos desalineadas")
+        # Las anotaciones excluyen giros; conservar el residuo evita perderlos.
+        salida["residuo_s"] = r["duration"] - sum(ann["duration"])
     return salida
 
 

@@ -258,3 +258,76 @@ def recorre_cerrados(nodos: Sequence[int],
     siete falsos positivos.
     """
     return [s for s in segmentos_de_ruta(nodos) if s in segmentos_cerrados]
+
+
+def metadatos_overpass(bbox=BBOX, forzar=False):
+    """Ways con IDs/carriles y nodos semaforizados; consulta cacheable conjunta."""
+    import hashlib
+    clave = hashlib.sha256(repr(tuple(bbox)).encode()).hexdigest()[:12]
+    archivo = DERIVADOS / f'metadatos_overpass_{clave}.json'
+    if archivo.exists() and not forzar:
+        return json.loads(archivo.read_text())
+    s, o, n, e = bbox
+    els = _overpass(f'''[out:json][timeout:180];
+      (way["highway"]({s},{o},{n},{e});
+       node["highway"="traffic_signals"]({s},{o},{n},{e}););out body geom;''')
+    datos = {'fuente': 'Overpass', 'bbox': list(bbox),
+             'ways': [x for x in els if x['type'] == 'way'],
+             'semaforos': [x['id'] for x in els if x['type'] == 'node']}
+    archivo.write_text(json.dumps(datos))
+    return datos
+
+
+def atributos_segmentos(ways, segmentos):
+    """Mapea arcos dirigidos a clase/carriles; imputa un carril si falta.
+
+    lanes es total del way: en vías bidireccionales se reparte entre sentidos;
+    lanes:forward/backward tienen prioridad. oneway=-1 invierte el sentido.
+    """
+    import re
+    salida = {}
+    def numero(valor):
+        if valor is None or not re.fullmatch(r'\d+(\.\d+)?', str(valor)): return None
+        v = float(valor)
+        return v if v > 0 else None
+    for w in ways:
+        tags = w.get('tags', {})
+        nodos = w.get('nodes', [])
+        uno = tags.get('oneway', 'yes' if tags.get('junction') == 'roundabout' else 'no')
+        total = numero(tags.get('lanes'))
+        for a, b in zip(nodos, nodos[1:]):
+            for adelante, par in ((True, (a,b)), (False, (b,a))):
+                if par not in segmentos: continue
+                direccional = numero(tags.get('lanes:forward' if adelante else 'lanes:backward'))
+                bidireccional = uno not in ('yes','1','true','-1')
+                opuesto = numero(tags.get('lanes:backward' if adelante else 'lanes:forward'))
+                inferido = (max(1., total-opuesto) if opuesto else max(1., total/2)) if total and bidireccional else total
+                carriles = direccional or inferido or 1.
+                salida[f'{par[0]},{par[1]}'] = {
+                    'way_id': w['id'], 'highway': tags.get('highway', 'unclassified'),
+                    'carriles': carriles, 'carriles_imputados': total is None and direccional is None,
+                }
+    return salida
+
+
+def metadatos_pbf(archivo, segmentos, nodos):
+    """Extrae del MISMO snapshot OSRM, incluyendo rutas que salen del BBOX.
+
+    Evita discrepancias temporales entre Overpass en vivo y el grafo local.
+    Conserva sólo los metadatos utilizados por las rutas del experimento.
+    """
+    import osmium
+    class Lector(osmium.SimpleHandler):
+        def __init__(self):
+            super().__init__(); self.ways = []; self.semaforos = []
+        def node(self, n):
+            if n.id in nodos and n.tags.get('highway') == 'traffic_signals':
+                self.semaforos.append(n.id)
+        def way(self, w):
+            refs = [n.ref for n in w.nodes]
+            if any((a,b) in segmentos or (b,a) in segmentos for a,b in zip(refs, refs[1:])):
+                self.ways.append({'id': w.id, 'nodes': refs, 'tags': dict(w.tags)})
+    lector = Lector(); lector.apply_file(str(archivo))
+    return {'fuente': 'PBF del grafo OSRM',
+            'segmentos': atributos_segmentos(lector.ways, segmentos),
+            'semaforos': sorted(lector.semaforos)}

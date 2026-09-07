@@ -35,6 +35,12 @@ correr osrm-partition "/data/$BASE.osrm"
 echo "==> osrm-customize (línea base, sin cierres)"
 correr osrm-customize "/data/$BASE.osrm"
 
+# customize modifica .geometry en el sitio. Guardar una base íntegra antes
+# de aplicar cierres; omitir el CSV NO restablece velocidades anteriores.
+RESPALDO="$DATOS/base_original"
+mkdir -p "$RESPALDO"
+cp "$DATOS/$BASE.osrm."* "$RESPALDO/"
+
 echo
 echo "Grafo listo. Levantar el servidor con:"
 echo "  docker compose -f osrm/docker-compose.yml up -d"
