@@ -1,0 +1,219 @@
+{
+  "version": 1,
+  "creado_utc": "2026-09-07T02:59:07.877718+00:00",
+  "pbf_sha256": "a2100e3fc432df7b6356e714b7b5bad09d102b88216f0d1758640ac05ae23ade",
+  "pbf_url": "https://download.geofabrik.de/central-america/guatemala-latest.osm.pbf",
+  "cierres_sha256": {
+    "vista_hermosa": "2f3f00aca7a47e91391ae30725a60365685729d2251cacf33e2945c9e67e73fa",
+    "reforma": "e8586287967b082bb08e53c4e7e074ef9148e92f03e8764fd0b7794bb6c6c38f"
+  },
+  "osrm_imagen": "sha256:1602ad95ac21aa7c85e0fa313402821a93e7103ee6828c95ab4a2fe493e42d9f",
+  "validacion": {
+    "vista_hermosa": {
+      "pares_verificados": 552,
+      "rutas_base_afectadas": 263,
+      "segmentos_cerrados": 408,
+      "tolerancia_s": 0.2
+    },
+    "reforma": {
+      "pares_verificados": 552,
+      "rutas_base_afectadas": 70,
+      "segmentos_cerrados": 162,
+      "tolerancia_s": 0.2
+    }
+  },
+  "puntos": [
+    {
+      "id": "z10_0",
+      "zona": "z10",
+      "lat": 14.605341,
+      "lon": -90.511095,
+      "calle": "5a Avenida",
+      "ajuste_m": 31.875291
+    },
+    {
+      "id": "z10_1",
+      "zona": "z10",
+      "lat": 14.596829,
+      "lon": -90.510189,
+      "calle": "7a Avenida",
+      "ajuste_m": 25.356486
+    },
+    {
+      "id": "z10_2",
+      "zona": "z10",
+      "lat": 14.595708,
+      "lon": -90.505273,
+      "calle": "12 Avenida",
+      "ajuste_m": 18.037458
+    },
+    {
+      "id": "z10_3",
+      "zona": "z10",
+      "lat": 14.601252,
+      "lon": -90.517354,
+      "calle": "(sin nombre)",
+      "ajuste_m": 11.591785
+    },
+    {
+      "id": "z10_4",
+      "zona": "z10",
+      "lat": 14.592419,
+      "lon": -90.508971,
+      "calle": "17 Calle",
+      "ajuste_m": 2.170176
+    },
+    {
+      "id": "z10_5",
+      "zona": "z10",
+      "lat": 14.60282,
+      "lon": -90.506075,
+      "calle": "(sin nombre)",
+      "ajuste_m": 3.445716
+    },
+    {
+      "id": "z10_6",
+      "zona": "z10",
+      "lat": 14.591447,
+      "lon": -90.509613,
+      "calle": "(sin nombre)",
+      "ajuste_m": 6.756425
+    },
+    {
+      "id": "z10_7",
+      "zona": "z10",
+      "lat": 14.593495,
+      "lon": -90.515452,
+      "calle": "(sin nombre)",
+      "ajuste_m": 4.565157
+    },
+    {
+      "id": "z15_0",
+      "zona": "z15",
+      "lat": 14.597479,
+      "lon": -90.491671,
+      "calle": "18 Avenida B",
+      "ajuste_m": 8.001824
+    },
+    {
+      "id": "z15_1",
+      "zona": "z15",
+      "lat": 14.612007,
+      "lon": -90.486112,
+      "calle": "(sin nombre)",
+      "ajuste_m": 13.211559
+    },
+    {
+      "id": "z15_2",
+      "zona": "z15",
+      "lat": 14.605009,
+      "lon": -90.489203,
+      "calle": "(sin nombre)",
+      "ajuste_m": 8.083953
+    },
+    {
+      "id": "z15_3",
+      "zona": "z15",
+      "lat": 14.603899,
+      "lon": -90.491244,
+      "calle": "16 Avenida",
+      "ajuste_m": 28.200646
+    },
+    {
+      "id": "z15_4",
+      "zona": "z15",
+      "lat": 14.606932,
+      "lon": -90.489562,
+      "calle": "14 Calle",
+      "ajuste_m": 61.004332
+    },
+    {
+      "id": "z15_5",
+      "zona": "z15",
+      "lat": 14.601211,
+      "lon": -90.488637,
+      "calle": "11 Calle",
+      "ajuste_m": 43.105623
+    },
+    {
+      "id": "z15_6",
+      "zona": "z15",
+      "lat": 14.597945,
+      "lon": -90.488394,
+      "calle": "20 Avenida",
+      "ajuste_m": 14.581116
+    },
+    {
+      "id": "z15_7",
+      "zona": "z15",
+      "lat": 14.607531,
+      "lon": -90.491316,
+      "calle": "15 Avenida",
+      "ajuste_m": 18.015697
+    },
+    {
+      "id": "z16_0",
+      "zona": "z16",
+      "lat": 14.612713,
+      "lon": -90.481784,
+      "calle": "(sin nombre)",
+      "ajuste_m": 74.4372
+    },
+    {
+      "id": "z16_1",
+      "zona": "z16",
+      "lat": 14.610073,
+      "lon": -90.486478,
+      "calle": "(sin nombre)",
+      "ajuste_m": 15.946002
+    },
+    {
+      "id": "z16_2",
+      "zona": "z16",
+      "lat": 14.601321,
+      "lon": -90.488678,
+      "calle": "11 Calle",
+      "ajuste_m": 104.923665
+    },
+    {
+      "id": "z16_3",
+      "zona": "z16",
+      "lat": 14.602,
+      "lon": -90.488469,
+      "calle": "11 Calle",
+      "ajuste_m": 16.425953
+    },
+    {
+      "id": "z16_4",
+      "zona": "z16",
+      "lat": 14.612674,
+      "lon": -90.490945,
+      "calle": "Alameda Jacarandas",
+      "ajuste_m": 34.475579
+    },
+    {
+      "id": "z16_5",
+      "zona": "z16",
+      "lat": 14.605465,
+      "lon": -90.491109,
+      "calle": "(sin nombre)",
+      "ajuste_m": 4.253914
+    },
+    {
+      "id": "z16_6",
+      "zona": "z16",
+      "lat": 14.60153,
+      "lon": -90.484506,
+      "calle": "11 Calle",
+      "ajuste_m": 14.344188
+    },
+    {
+      "id": "z16_7",
+      "zona": "z16",
+      "lat": 14.615576,
+      "lon": -90.483793,
+      "calle": "Carril Auxiliar Boulevard Austr\u00edaco",
+      "ajuste_m": 43.54085
+    }
+  ]
+}

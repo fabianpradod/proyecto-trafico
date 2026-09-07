@@ -251,3 +251,15 @@ data/cache/
 figuras/*.png
 figuras/*.svg
 figuras/*.pdf
+
+# Entregables vectoriales de C: disponibles aun antes de reejecutar notebooks.
+!figuras/02_rutas_antes_despues.svg
+!figuras/03_histogramas.svg
+!figuras/04_matriz_zonas.svg
+!figuras/08_sensibilidad_demanda.svg
+!figuras/09_intervalos_pareados.svg
+!figuras/02_rutas_antes_despues.png
+!figuras/03_histogramas.png
+!figuras/04_matriz_zonas.png
+!figuras/08_sensibilidad_demanda.png
+!figuras/09_intervalos_pareados.png

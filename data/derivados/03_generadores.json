@@ -98,16 +98,16 @@
     }
   },
   "tiempos_ns_por_variable": {
-    "uniforme · pcg64": 3.336,
-    "uniforme · lcg": 12.59,
-    "uniforme · randu": 11.926,
-    "normal polar · pcg64": 59.609,
-    "normal rechazo · pcg64": 68.156,
-    "normal polar · lcg": 66.496,
-    "normal rechazo · lcg": 97.062,
-    "exponencial · pcg64": 22.384,
-    "erlang(2) · pcg64": 54.552,
-    "lognormal · pcg64": 66.297
+    "uniforme · pcg64": 3.005,
+    "uniforme · lcg": 1.519,
+    "uniforme · randu": 1.555,
+    "normal polar · pcg64": 14.95,
+    "normal rechazo · pcg64": 22.755,
+    "normal polar · lcg": 12.974,
+    "normal rechazo · lcg": 17.552,
+    "exponencial · pcg64": 7.2,
+    "erlang(2) · pcg64": 19.111,
+    "lognormal · pcg64": 19.643
   },
   "randu_planos": 15,
   "figuras": [
