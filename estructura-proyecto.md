@@ -558,7 +558,7 @@ colores por su cuenta.
 
 | Riesgo | Señal | Plan B |
 |---|---|---|
-| La imagen de OSRM no tiene build arm64 | `docker pull` falla | `export PLATAFORMA="--platform linux/amd64"`; corre bajo emulación, más lento pero funciona |
+| La imagen de OSRM no corre en la máquina | `docker pull` falla | `ghcr.io/project-osrm/osrm-backend:latest` **sí trae build nativo `linux/arm64`** (verificado en Apple Silicon), así que no hace falta emular. Si aun así falla: `export PLATAFORMA="--platform linux/amd64"` |
 | `osrm-extract` se queda sin memoria | El contenedor muere | Recortar el pbf al área con `osmium extract` antes de procesarlo |
 | Overpass no responde | Timeout | `src/red.py` ya rota entre dos espejos; en el peor caso, cachear los ways en `data/derivados/` |
 | El cierre no cambia las rutas | Falla la verificación §12.1 | Revisar que los IDs sean de nodo OSM y no de way; confirmar que se escribieron ambos sentidos |
