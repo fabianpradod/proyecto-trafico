@@ -246,3 +246,7 @@ data/osrm/
 data/cache/
 *.osm.pbf
 *.osrm*
+
+# Las figuras se regeneran con los notebooks; solo se versiona el mapa final.
+figuras/*.png
+figuras/*.svg
