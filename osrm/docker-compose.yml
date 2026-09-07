@@ -1,0 +1,17 @@
+# Servidor OSRM local. El grafo lo construye osrm/construir.sh; aquí solo se
+# sirve. Cada cambio de escenario reinicia este contenedor, que es cuestión
+# de segundos porque el grafo ya está compilado.
+services:
+  osrm:
+    image: ghcr.io/project-osrm/osrm-backend:latest
+    container_name: osrm-guatemala
+    command: >
+      osrm-routed --algorithm mld
+      --max-table-size 10000
+      --max-matching-size 1000
+      /data/guatemala-latest.osrm
+    volumes:
+      - ../data/osm:/data
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
