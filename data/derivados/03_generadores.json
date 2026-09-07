@@ -1,0 +1,119 @@
+{
+  "semilla": 20172026,
+  "n_muestra": 1000000,
+  "parametros": {
+    "lambda_min": 800.0,
+    "lambda_max": 2300.0,
+    "t_pico_h": 1.5,
+    "tau_h": 0.75,
+    "horizonte_h": 3.0,
+    "integral_lambda": 5091.648029975868,
+    "eficiencia_adelgazamiento_teorica": 0.7379200043443287,
+    "eficiencia_adelgazamiento_medida": 0.7379979771030247,
+    "logn_mu": 0.0,
+    "logn_sigma": 0.2,
+    "erlang_k": 2,
+    "erlang_lambda": 0.06666666666666667
+  },
+  "pruebas_uniformes": {
+    "pcg64": {
+      "KS D": 0.000944,
+      "KS p": 0.335069,
+      "χ² (99 gl)": 91.6,
+      "χ² p": 0.688605,
+      "rachas z": 0.362081,
+      "rachas p": 0.717291,
+      "hueco χ²": 10.149748,
+      "hueco p": 0.427455,
+      "|r| máx": 0.002593,
+      "rezagos fuera de banda": 1
+    },
+    "lcg": {
+      "KS D": 0.00079,
+      "KS p": 0.560812,
+      "χ² (99 gl)": 71.6558,
+      "χ² p": 0.982547,
+      "rachas z": 0.103565,
+      "rachas p": 0.917515,
+      "hueco χ²": 9.292775,
+      "hueco p": 0.504562,
+      "|r| máx": 0.001766,
+      "rezagos fuera de banda": 0
+    },
+    "randu": {
+      "KS D": 0.001223,
+      "KS p": 0.100214,
+      "χ² (99 gl)": 103.8438,
+      "χ² p": 0.349754,
+      "rachas z": 1.315509,
+      "rachas p": 0.188339,
+      "hueco χ²": 4.109526,
+      "hueco p": 0.942271,
+      "|r| máx": 0.002327,
+      "rezagos fuera de banda": 1
+    }
+  },
+  "normales": {
+    "polar": {
+      "media": 0.000109,
+      "desv.": 1.000315,
+      "asimetría": 0.00259,
+      "curtosis exc.": 0.004888,
+      "KS D": 0.000589,
+      "KS p": 0.878575
+    },
+    "rechazo": {
+      "media": 0.000424,
+      "desv.": 0.999203,
+      "asimetría": -0.000428,
+      "curtosis exc.": 0.000828,
+      "KS D": 0.000819,
+      "KS p": 0.51366
+    }
+  },
+  "uniformes_por_normal": {
+    "polar": {
+      "medido": 1.27575,
+      "teorico": 1.2732395447351628
+    },
+    "rechazo": {
+      "medido": 3.636186,
+      "teorico": 3.630978493917828
+    }
+  },
+  "cola_3sigma": {
+    "polar": {
+      "sigmas": 3.0,
+      "empirica": 0.002673,
+      "teorica": 0.002699796063260186,
+      "razon": 0.9900747824530761,
+      "casos": 2673
+    },
+    "rechazo": {
+      "sigmas": 3.0,
+      "empirica": 0.002624,
+      "teorica": 0.002699796063260186,
+      "razon": 0.9719252634331731,
+      "casos": 2624
+    }
+  },
+  "tiempos_ns_por_variable": {
+    "uniforme · pcg64": 3.336,
+    "uniforme · lcg": 12.59,
+    "uniforme · randu": 11.926,
+    "normal polar · pcg64": 59.609,
+    "normal rechazo · pcg64": 68.156,
+    "normal polar · lcg": 66.496,
+    "normal rechazo · lcg": 97.062,
+    "exponencial · pcg64": 22.384,
+    "erlang(2) · pcg64": 54.552,
+    "lognormal · pcg64": 66.297
+  },
+  "randu_planos": 15,
+  "figuras": [
+    "05_randu_planos",
+    "06_qq_normales",
+    "07_costo_generacion",
+    "03_llegadas_nhpp"
+  ]
+}
