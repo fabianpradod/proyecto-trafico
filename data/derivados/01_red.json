@@ -1,0 +1,165 @@
+{
+  "bbox": [
+    14.575,
+    -90.53,
+    14.63,
+    -90.455
+  ],
+  "red_del_area": {
+    "ways": 5512,
+    "km_totales": 744.93,
+    "km_por_clase": {
+      "residential": 443.68,
+      "tertiary": 105.96,
+      "trunk": 22.26,
+      "trunk_link": 5.95,
+      "primary": 74.97,
+      "unclassified": 4.16,
+      "secondary": 70.91,
+      "primary_link": 11.78,
+      "secondary_link": 5.27
+    }
+  },
+  "candidatas": {
+    "vista_hermosa": {
+      "etiqueta": "Cierre Boulevard Vista Hermosa",
+      "nombres_osm": [
+        "Boulevard Vista Hermosa"
+      ],
+      "ways": 23,
+      "way_ids": [
+        29398551,
+        29398552,
+        29398775,
+        288313472,
+        288325659,
+        328394227,
+        378327160,
+        378406764,
+        397184145,
+        406625095,
+        406625097,
+        620983079,
+        623951487,
+        623951488,
+        932162354,
+        932162356,
+        932162357,
+        932162361,
+        1257034519,
+        1258894339,
+        1275900857,
+        1460396609,
+        1473783546
+      ],
+      "nodos": 227,
+      "segmentos": 408,
+      "km": 8.68
+    },
+    "reforma": {
+      "etiqueta": "Cierre Avenida Reforma (calzada principal)",
+      "nombres_osm": [
+        "Avenida Reforma"
+      ],
+      "ways": 36,
+      "way_ids": [
+        34994949,
+        39750172,
+        39750173,
+        39750175,
+        400019042,
+        400331388,
+        400331492,
+        400331494,
+        400331739,
+        400331741,
+        400331743,
+        400331767,
+        400333506,
+        400333511,
+        400333516,
+        400333521,
+        400334089,
+        400334091,
+        400334094,
+        400334664,
+        400334666,
+        400334670,
+        400334678,
+        511820722,
+        511820723,
+        641026207,
+        699468657,
+        754392024,
+        754396841,
+        754397812,
+        1167958809,
+        1169207949,
+        1169207950,
+        1169207951,
+        1238780605,
+        1473788132
+      ],
+      "nodos": 117,
+      "segmentos": 162,
+      "km": 4.6
+    }
+  },
+  "rutas_referencia": [
+    {
+      "origen": "uvg",
+      "destino": "proceres",
+      "recta_km": 2.3588,
+      "ruta_km": 9.4627,
+      "rodeo": 4.0117,
+      "flujo_libre_min": 13.4433,
+      "nodos": 393
+    },
+    {
+      "origen": "uvg",
+      "destino": "reforma",
+      "recta_km": 2.7691,
+      "ruta_km": 8.0703,
+      "rodeo": 2.9144,
+      "flujo_libre_min": 11.7683,
+      "nodos": 330
+    },
+    {
+      "origen": "cayala",
+      "destino": "proceres",
+      "recta_km": 2.8861,
+      "ruta_km": 8.5587,
+      "rodeo": 2.9655,
+      "flujo_libre_min": 12.75,
+      "nodos": 325
+    },
+    {
+      "origen": "cayala",
+      "destino": "reforma",
+      "recta_km": 3.1104,
+      "ruta_km": 7.1663,
+      "rodeo": 2.304,
+      "flujo_libre_min": 11.075,
+      "nodos": 262
+    },
+    {
+      "origen": "vista_hermosa",
+      "destino": "cayala",
+      "recta_km": 1.6465,
+      "ruta_km": 3.7546,
+      "rodeo": 2.2803,
+      "flujo_libre_min": 4.8433,
+      "nodos": 174
+    },
+    {
+      "origen": "reforma",
+      "destino": "uvg",
+      "recta_km": 2.7691,
+      "ruta_km": 5.5585,
+      "rodeo": 2.0073,
+      "flujo_libre_min": 8.96,
+      "nodos": 218
+    }
+  ],
+  "servidor_usado": "https://router.project-osrm.org"
+}
