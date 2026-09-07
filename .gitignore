@@ -250,3 +250,4 @@ data/cache/
 # Las figuras se regeneran con los notebooks; solo se versiona el mapa final.
 figuras/*.png
 figuras/*.svg
+figuras/*.pdf
