@@ -83,7 +83,7 @@ AirPlay en macOS. Después, cada cambio de escenario cuesta 5.7 s:
 |---|---|---|
 | [`01_red_y_osrm.ipynb`](notebooks/01_red_y_osrm.ipynb) | Descarga del extracto, grafo OSRM, validación de la red, mapa del área | listo |
 | [`02_linea_base_y_cierres.ipynb`](notebooks/02_linea_base_y_cierres.ipynb) | Matriz O-D base, generación de los CSV de cierre, verificación de que el cierre funciona | listo |
-| `03_generadores.ipynb` | Generadores de variables aleatorias y su validación | pista B |
+| [`03_generadores.ipynb`](notebooks/03_generadores.ipynb) | Generadores de variables aleatorias, validación de §8 y los tres pares de §7 | listo |
 | `04_simulacion.ipynb` | Motor de simulación y corridas | pista C |
 | `05_analisis_y_figuras.ipynb` | Δ%, intervalos y figuras del informe | pista C |
 
@@ -93,6 +93,7 @@ AirPlay en macOS. Después, cada cambio de escenario cuesta 5.7 s:
 src/config.py     zonas, escenarios, semilla, paleta — la única fuente de verdad
 src/osrm.py       cliente OSRM (route, table, nearest)
 src/red.py        Overpass y generación de los archivos de cierre
+src/generadores.py  variables aleatorias (LCG, RANDU, PCG64, polar, rechazo, NHPP)
 osrm/             pipeline Docker
 data/derivados/   csv y json pequeños (sí van al repo)
 data/osm/         pbf y grafo compilado (ignorados por git)

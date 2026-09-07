@@ -338,6 +338,45 @@ den el mismo Δ% dentro del error — y demostrarlo tiene más valor que
 asumirlo. El resultado interesante es que **RANDU sí lo mueva**: eso cierra el
 argumento de por qué se valida.
 
+### Resultados medidos *(notebook 03, ya ejecutado)*
+
+Criterios 1, 2, 4 y 6. El 3 lo cubre §8 y el 5 depende del notebook 04.
+
+| Par | Medición | Resultado |
+|---|---|---|
+| 1 | Costo por normal (PCG64) | polar 59.6 ns · rechazo 68.2 ns |
+| 1 | Uniformes por normal | polar 1.2757 (teoría 1.2732) · rechazo 3.6362 (teoría 3.6310) |
+| 1 | Cola a 3σ, razón empírica/teórica | polar 0.990 · rechazo 0.972 |
+| 1 | Líneas de código | polar 20 · rechazo 19 |
+| 2 | Distribución de *N(T)* | KS de dos muestras p = 0.90: los dos coinciden |
+| 3 | Costo por uniforme | PCG64 3.3 ns · LCG propio 12.6 ns · RANDU 11.9 ns |
+
+Los tiempos son de la máquina donde se corrió el notebook y cambian entre
+corridas; el consumo de uniformes no, porque es propiedad del algoritmo.
+
+Los dos métodos del par 1 son exactos y no se distinguen en calidad, así que la
+elección se puede hacer por costo. El polar gana en las dos cosas medidas —más
+rápido y 2.85× menos uniformes— y es el que usa el proyecto; el rechazo queda
+documentado como competidor.
+
+RANDU, por su parte, pasó las cinco pruebas de §8 y está roto igual: sus
+tripletas caen sobre 15 planos, verificado con aritmética entera. Es el
+argumento de por qué §8 existe, y está en la figura 5.
+
+### Parámetros que la pista B fijó
+
+Estaban sin definir y ahora viven en `src/config.py`:
+
+| Parámetro | Valor | Criterio |
+|---|---|---|
+| σ de la lognormal (fuente D) | 0.20 | el 90 % central conduce entre 0.72× y 1.39× |
+| Media de la Erlang(k=2) (fuente E) | 30 s | demora típica de semáforo urbano |
+| λ_min, λ_max | 800, 2 300 veh/h | dan 5 091.6 vehículos por réplica (el «~5 000» de §9.1) |
+| t_pico, τ | 1.5 h (17:30), 0.75 h | pico de salida de oficinas |
+
+La eficiencia del adelgazamiento sale 0.7379 teórica contra 0.7380 medida sobre
+400 réplicas, que es lo que §5.1 pide reportar.
+
 ---
 
 ## 8. Validación estadística
@@ -438,12 +477,12 @@ proyecto/
 │   ├── config.py                   zonas, escenarios, semilla, paleta   [listo]
 │   ├── osrm.py                     cliente OSRM                          [listo]
 │   ├── red.py                      Overpass y archivos de cierre         [listo]
-│   ├── generadores.py              métodos de generación              [pista B]
+│   ├── generadores.py              métodos de generación                 [listo]
 │   └── simulacion.py               motor de simulación                [pista C]
 ├── notebooks/
 │   ├── 01_red_y_osrm.ipynb         red, servidor, validación             [listo]
 │   ├── 02_linea_base_y_cierres.ipynb  rutas base y cierres               [listo]
-│   ├── 03_generadores.ipynb        generación y validación            [pista B]
+│   ├── 03_generadores.ipynb        generación y validación               [listo]
 │   ├── 04_simulacion.ipynb         corridas y Δ%                      [pista C]
 │   └── 05_analisis_y_figuras.ipynb resultados y figuras              [pista C]
 ├── osrm/
