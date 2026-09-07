@@ -69,6 +69,9 @@ conclusión; los minutos aparecen solo como insumo intermedio.
 | Recurso escaso | Capacidad de cada segmento vial |
 | Evento externo | Cierre total de una vía principal |
 
+La caja encierra **5 512 ways y 744.9 km** de vía conducible, de los cuales
+97.2 km son estructurantes (`trunk` + `primary`). Medido en el notebook 01.
+
 Quedan **fuera** del modelo: transporte público, motocicletas con
 comportamiento de filtrado entre carriles, peatones, estacionamiento en vía,
 y todo viaje con un extremo fuera de la caja. Son simplificaciones conscientes
@@ -90,10 +93,21 @@ viajes en la tarde. Su efecto se examina en el análisis de sensibilidad (§9.3)
 Ambos verificados contra Overpass; los nombres son literalmente los de la
 etiqueta `name` de OpenStreetMap.
 
-| Escenario | Nombre OSM | Ways | Nodos | Segmentos dirigidos | Clase |
-|---|---|---|---|---|---|
-| Crítico | `Boulevard Vista Hermosa` | 23 | 227 | 408 | `primary`, `oneway=yes` |
-| Redundante | `Avenida Reforma` | 36 | 117 | 162 | `primary`/`tertiary`, `oneway=yes` |
+| Escenario | Nombre OSM | Ways | km | Nodos únicos | Segmentos dirigidos | Clase |
+|---|---|---|---|---|---|---|
+| Crítico | `Boulevard Vista Hermosa` | 23 | 8.68 | 206 | 408 | `primary`, `oneway=yes` |
+| Redundante | `Avenida Reforma` | 36 | 4.60 | 84 | 162 | `primary`/`tertiary`, `oneway=yes` |
+
+Medido con el notebook 01. Los *nodos únicos* son los que forman el conjunto
+contra el que se verifica el cierre (§12.1); los *segmentos dirigidos* son las
+líneas del CSV que consume `osrm-customize`.
+
+**Contexto que salió de la validación:** el rodeo mediano entre los puntos
+ancla es de **2.6×** la línea recta, y el peor par (UVG → Los Próceres) es de
+**4.0×** — 2.36 km en línea recta contra 9.46 km por calle. No es un defecto de
+la red: son los barrancos que separan la zona 15 de la zona 10 y obligan a pasar
+por unos pocos cruces. La red ya opera con muy poca holgura, que es precisamente
+la condición bajo la cual un cierre duele.
 
 **El contraste entre los dos es el hallazgo central del proyecto**, no un
 detalle. Vista Hermosa es la espina de la zona 15, encajonada entre barrancos y
@@ -254,7 +268,7 @@ toman sus nodos consecutivos y se escriben los pares en ambos sentidos.
 
 | Recurso | Tamaño | Origen |
 |---|---|---|
-| `guatemala-latest.osm.pbf` | 131 MB | Geofabrik |
+| `guatemala-latest.osm.pbf` | 131 MB | Geofabrik (verificado) |
 | Grafo OSRM compilado | ~1.5 GB | generado localmente |
 | CSV de cierre | pocos KB | Overpass |
 

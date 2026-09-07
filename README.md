@@ -23,10 +23,12 @@ El razonamiento completo está en
 
 ## Los dos escenarios
 
-| Escenario | Vía | Ways | Segmentos | Hipótesis |
-|---|---|---|---|---|
-| Crítico | `Boulevard Vista Hermosa` (z15) | 23 | 408 | Espina encajonada entre barrancos, pocas paralelas → **Δ% grande** |
-| Redundante | `Avenida Reforma` (z10) | 36 | 162 | Retícula densa y carriles auxiliares intactos → **Δ% pequeño** |
+| Escenario | Vía | Ways | km | Segmentos | Hipótesis |
+|---|---|---|---|---|---|
+| Crítico | `Boulevard Vista Hermosa` (z15) | 23 | 8.68 | 408 | Espina encajonada entre barrancos, pocas paralelas → **Δ% grande** |
+| Redundante | `Avenida Reforma` (z10) | 36 | 4.60 | 162 | Retícula densa y 4.2 km de carriles auxiliares que quedan abiertos → **Δ% pequeño** |
+
+Área de estudio: **5 512 ways, 744.9 km** de vía conducible en las tres zonas.
 
 El contraste entre los dos es el hallazgo central: la misma metodología
 distingue un eslabón crítico de uno redundante.
