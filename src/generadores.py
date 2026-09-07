@@ -403,9 +403,14 @@ class Generador:
         if lam_max is None:
             malla = np.linspace(0.0, T, 2001)
             lam_max = float(np.max(lam_func(malla)))
+        if not np.isfinite(T) or T <= 0 or not np.isfinite(lam_max) or lam_max <= 0:
+            raise ValueError("horizonte y cota deben ser positivos")
         candidatos = self._poisson_inversa(T, lam_max)
         u = self.uniformes(candidatos.size)
-        acepta = u < (np.asarray(lam_func(candidatos), dtype=float) / lam_max)
+        tasas = np.asarray(lam_func(candidatos), dtype=float)
+        if not np.isfinite(tasas).all() or np.any(tasas < 0) or np.any(tasas > lam_max*(1+1e-12)):
+            raise ValueError("lambda(t) fuera de la envolvente de adelgazamiento")
+        acepta = u < tasas / lam_max
         instantes = candidatos[acepta]
         if devolver_eficiencia:
             ef = float(acepta.mean()) if candidatos.size else float("nan")

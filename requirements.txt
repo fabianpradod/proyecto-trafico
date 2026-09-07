@@ -10,3 +10,6 @@ folium
 jupyter
 ipykernel
 tqdm
+osmium
+nbclient
+pytest

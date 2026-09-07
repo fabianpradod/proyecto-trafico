@@ -134,7 +134,7 @@ T_PICO_H = 1.5        # 17:30
 TAU_H = 0.75          # ancho del pico
 
 
-def lambda_llegadas(t):
+def lambda_llegadas(t, minimo=None, maximo=None, pico=None, tau=None):
     """Intensidad en veh/h, con `t` en horas desde HORA_INICIO.
 
     Acepta escalar o arreglo. Es la única definición del pico en el proyecto:
@@ -143,9 +143,11 @@ def lambda_llegadas(t):
     import numpy as _np
 
     t = _np.asarray(t, dtype=float)
-    return LAMBDA_MIN + (LAMBDA_MAX - LAMBDA_MIN) * _np.exp(
-        -((t - T_PICO_H) ** 2) / (2.0 * TAU_H**2)
-    )
+    minimo = LAMBDA_MIN if minimo is None else minimo
+    maximo = LAMBDA_MAX if maximo is None else maximo
+    pico = T_PICO_H if pico is None else pico
+    tau = TAU_H if tau is None else tau
+    return minimo + (maximo - minimo) * _np.exp(-((t - pico) ** 2) / (2.0 * tau**2))
 
 
 # Cota para el adelgazamiento: λ(t) vale λ_max justo en t_pico, así que la
@@ -181,16 +183,12 @@ LCG_A, LCG_C, LCG_M = 1664525, 1013904223, 2**32
 RANDU_A, RANDU_C, RANDU_M = 65539, 0, 2**31
 
 # --------------------------------------------------------------------------
-# Congestión — fuente F y §5.3  [pendiente: lo completa la pista C]
+# Congestión — fuente F y §5.3
 # --------------------------------------------------------------------------
 # Valores clásicos del Bureau of Public Roads, ya fijados en §5.3.
 ALFA_BPR = 0.15
 BETA_BPR = 4.0
-# Faltan, y los decide la pista C antes de escribir simulacion.py:
-#   - capacidad nominal por carril y por clase de vía (fuente F)
-#   - σ y truncamiento de la normal de capacidad
-#   - ventana de tiempo sobre la que se cuenta el flujo v_a
-#   - fracción de viajes intrazonales y pesos de ORIGEN por zona (§5.2)
+# Las capacidades, ventanas y pesos de demanda están definidos al final.
 
 # --------------------------------------------------------------------------
 # Presentación
@@ -200,3 +198,22 @@ ORANGE = "#FC4C02"
 GREY = "#696969"
 YELLOW = "#FDB92E"
 PALETA = [NAVY, ORANGE, GREY, YELLOW]
+
+# Pista C: supuestos de simulación, NO estimaciones calibradas de Guatemala.
+VENTANA_H = 0.25                         # cohortes de salida de 15 minutos
+PESOS_ORIGEN = (0.40, 0.35, 0.25)
+FRACCION_INTRAZONAL = 0.20
+CAPACIDAD_POR_CARRIL = {                 # veh/h/carril, hipótesis nominales
+    'motorway': 2000., 'trunk': 1800., 'primary': 1500.,
+    'secondary': 1200., 'tertiary': 1000., 'residential': 600.,
+    'unclassified': 800., 'service': 400., 'living_street': 400.,
+}
+CAPACIDAD_CV = 0.10
+CAPACIDAD_MIN_REL = 0.50
+CAPACIDAD_MAX_REL = 1.50
+REPLICAS = 30
+BOOTSTRAP_REPLICAS = 2000
+NIVEL_CONFIANZA = 0.95
+FACTORES_DEMANDA = (0.5, 1.0, 1.5, 2.0)
+GENERADORES = (('pcg64', 'polar'), ('pcg64', 'rechazo'),
+               ('lcg', 'polar'), ('randu', 'polar'))
