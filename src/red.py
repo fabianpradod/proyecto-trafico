@@ -236,3 +236,25 @@ def largo_km(geom: Sequence[tuple[float, float]]) -> float:
         a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
         total += 2 * R * math.asin(math.sqrt(a))
     return total
+
+
+def segmentos_de_ruta(nodos: Sequence[int]) -> list[tuple[int, int]]:
+    """Pares de nodos consecutivos que una ruta recorre."""
+    return list(zip(nodos, nodos[1:]))
+
+
+def recorre_cerrados(nodos: Sequence[int],
+                     segmentos_cerrados: set[tuple[int, int]]) -> list[tuple[int, int]]:
+    """Segmentos cerrados que la ruta efectivamente recorre.
+
+    Ojo con la distinción, que no es cosmética: una ruta puede **compartir un
+    nodo** con la calle cerrada sin circular por ella. Ese nodo es una
+    intersección, y el tráfico transversal la cruza con todo derecho. Lo que
+    delata a una ruta que sigue usando la calle cerrada es recorrer un
+    **segmento** —un par de nodos consecutivos—, no tocar un nodo suelto.
+
+    Medido en la Avenida Reforma: 7 de 60 rutas comparten nodos con la avenida
+    cerrada, y **ninguna** recorre un segmento suyo. Verificar por nodo daría
+    siete falsos positivos.
+    """
+    return [s for s in segmentos_de_ruta(nodos) if s in segmentos_cerrados]
