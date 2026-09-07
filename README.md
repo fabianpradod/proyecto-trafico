@@ -57,8 +57,9 @@ O directo desde la terminal, una vez descargado el `.pbf`:
 docker compose -f osrm/docker-compose.yml up -d
 ```
 
-`construir.sh` se corre **una sola vez** — tarda varios minutos. Después, cada
-cambio de escenario cuesta segundos:
+`construir.sh` se corre **una sola vez** (24 s en Apple Silicon, ~1 GB de grafo).
+El servidor queda en **`localhost:5001`** — el 5000 lo ocupa el receptor de
+AirPlay en macOS. Después, cada cambio de escenario cuesta segundos:
 
 ```bash
 ./osrm/cerrar.sh data/derivados/cierre_vista_hermosa.csv

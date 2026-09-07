@@ -564,6 +564,7 @@ colores por su cuenta.
 | El cierre no cambia las rutas | Falla la verificación §12.1 | Revisar que los IDs sean de nodo OSM y no de way; confirmar que se escribieron ambos sentidos |
 | La simulación tarda demasiado | Las réplicas no terminan | Bajar vehículos por réplica antes que réplicas: el IC depende más del número de réplicas |
 | Docker no arranca el día de la presentación | — | Notebook de respaldo con resultados ya ejecutados y salidas guardadas |
+| El contenedor no puede enlazar el puerto | `address already in use` | En macOS el 5000 lo ocupa el receptor de AirPlay (`ControlCenter`). El proyecto ya usa el **5001**; si también estuviera tomado, cambiarlo en `src/config.py` y en `docker-compose.yml` a la vez |
 
 ---
 

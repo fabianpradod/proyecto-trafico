@@ -13,5 +13,6 @@ services:
     volumes:
       - ../data/osm:/data
     ports:
-      - "5000:5000"
+      # 5001 en el host: en macOS el 5000 lo ocupa el receptor de AirPlay.
+      - "5001:5000"
     restart: unless-stopped

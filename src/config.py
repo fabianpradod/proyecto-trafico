@@ -31,7 +31,9 @@ SEMILLA = 20_172_026
 # --------------------------------------------------------------------------
 # Servidor OSRM
 # --------------------------------------------------------------------------
-OSRM_LOCAL = "http://127.0.0.1:5000"
+# Puerto 5001 y no 5000: en macOS el 5000 lo ocupa el receptor de AirPlay
+# (proceso ControlCenter), y el contenedor no puede enlazarlo.
+OSRM_LOCAL = "http://127.0.0.1:5001"
 OSRM_PUBLICO = "https://router.project-osrm.org"  # solo para sanity checks
 PERFIL = "driving"
 
